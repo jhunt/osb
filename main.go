@@ -13,9 +13,13 @@ import (
 	"github.com/jhunt/osb/api"
 )
 
+var Version = "(development version)"
+
 var opt struct {
 	Help  bool `cli:"-h, --help"`
 	Trace bool `cli:"-T, --trace" env:"OSB_TRACE"`
+
+	Version bool `cli:"-v, --version"`
 
 	Data string `cli:"--data" env:"OSB_DATA"`
 
@@ -103,6 +107,11 @@ func main() {
 		fmt.Printf("  bind           Bind a provisioned instance, to get credentials.\n")
 		fmt.Printf("  unbind         Unbind an instance, releasing bound credentials.\n")
 		fmt.Printf("\n")
+		os.Exit(0)
+	}
+
+	if command == "" && len(args) == 0 && opt.Version {
+		fmt.Printf("osb %s\n", Version)
 		os.Exit(0)
 	}
 
