@@ -51,7 +51,10 @@ var opt struct {
 		ID      string `cli:"-i, --binding, --id"`
 	} `cli:"unbind"`
 
-	Deprovision struct{} `cli:"deprovision, deprov, rm"`
+	Deprovision struct {
+		Service string `cli:"-s, --service"`
+		Plan    string `cli:"-p, --plan"`
+	} `cli:"deprovision, deprov, rm"`
 }
 
 func bail(e error) {
@@ -424,7 +427,41 @@ func main() {
 
 		deprovisioning(args)
 
-		stat, err := c.Deprovision(args[0])
+		instance := args[0]
+		service, plan, err := store.GetInstanceDetails(c.URL, instance)
+		bail(err)
+
+		if service == "" || plan == "" {
+			catalog, err := c.GetCatalog()
+			bail(err)
+
+			if service == "" {
+				service = opt.Unbind.Service
+				if service == "" {
+					fmt.Fprintf(os.Stderr, "@R{instance '%s' not found in local ~/.osbrc}\n", instance)
+					fmt.Fprintf(os.Stderr, "You must specify the --service flag to the deprovision operation.\n")
+					os.Exit(1)
+				}
+			}
+			if plan == "" {
+				plan = opt.Unbind.Plan
+				if plan == "" {
+					fmt.Fprintf(os.Stderr, "@R{instance '%s' not found in local ~/.osbrc}\n", instance)
+					fmt.Fprintf(os.Stderr, "You must specify the --plan flag to the deprovision operation.\n")
+					os.Exit(1)
+				}
+			}
+
+			s, p, err := catalog.FindPlan(service, plan)
+			bail(err)
+			service = s
+			plan = p
+		}
+		stat, err := c.Deprovision(api.DeprovisionSpec{
+			InstanceID: args[0],
+			ServiceID:  service,
+			PlanID:     plan,
+		})
 		bail(err)
 
 		store.RemoveInstance(c.URL, args[0])

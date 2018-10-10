@@ -31,7 +31,14 @@ func (c *Client) Unbind(spec UnbindSpec) (*UnbindStatus, error) {
 		return nil, fmt.Errorf("binding ID is required for unbinding")
 	}
 
-	res, err := c.del("/v2/service_instances/" + spec.InstanceID + "/service_bindings/" + spec.BindingID)
+	if spec.ServiceID == "" {
+		spec.ServiceID = "oops-unknown-service-id"
+	}
+	if spec.PlanID == "" {
+		spec.PlanID = "oops-unknown-plan-id"
+	}
+
+	res, err := c.del("/v2/service_instances/" + spec.InstanceID + "/service_bindings/" + spec.BindingID+"?service_id="+spec.ServiceID+"&plan_id="+spec.PlanID)
 	if err != nil {
 		return nil, err
 	}

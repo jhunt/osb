@@ -1,13 +1,34 @@
 package api
 
+import (
+	"fmt"
+)
+
+type DeprovisionSpec struct {
+	InstanceID string
+	ServiceID string
+	PlanID string
+}
+
 type DeprovisionStatus struct {
 	Status string `json:"-"`
 
 	Operation string `json:"operation"`
 }
 
-func (c *Client) Deprovision(id string) (*DeprovisionStatus, error) {
-	res, err := c.del("/v2/service_instances/" + id)
+func (c *Client) Deprovision(spec DeprovisionSpec) (*DeprovisionStatus, error) {
+	if spec.InstanceID == "" {
+		return nil, fmt.Errorf("instance ID is required for deprovisioning")
+	}
+
+	if spec.ServiceID == "" {
+		spec.ServiceID = "oops-unknown-service-id"
+	}
+	if spec.PlanID == "" {
+		spec.PlanID = "oops-unknown-plan-id"
+	}
+
+	res, err := c.del("/v2/service_instances/" + spec.InstanceID+"?service_id="+spec.ServiceID+"&plan_id="+spec.PlanID)
 	if err != nil {
 		return nil, err
 	}
