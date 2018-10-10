@@ -433,7 +433,7 @@ func main() {
 			bail(err)
 
 			if service == "" {
-				service = opt.Unbind.Service
+				service = opt.Deprovision.Service
 				if service == "" {
 					fmt.Fprintf(os.Stderr, "@R{instance '%s' not found in local ~/.osbrc}\n", instance)
 					fmt.Fprintf(os.Stderr, "You must specify the --service flag to the deprovision operation.\n")
@@ -441,7 +441,7 @@ func main() {
 				}
 			}
 			if plan == "" {
-				plan = opt.Unbind.Plan
+				plan = opt.Deprovision.Plan
 				if plan == "" {
 					fmt.Fprintf(os.Stderr, "@R{instance '%s' not found in local ~/.osbrc}\n", instance)
 					fmt.Fprintf(os.Stderr, "You must specify the --plan flag to the deprovision operation.\n")
