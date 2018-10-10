@@ -286,8 +286,7 @@ func main() {
 
 		binding(args)
 
-		service, plan, err := store.GetInstanceDetails(c.URL, args[0])
-		bail(err)
+		service, plan, _ := store.GetInstanceDetails(c.URL, args[0])
 		if service == "" || plan == "" {
 			catalog, err := c.GetCatalog()
 			bail(err)
@@ -428,9 +427,7 @@ func main() {
 		deprovisioning(args)
 
 		instance := args[0]
-		service, plan, err := store.GetInstanceDetails(c.URL, instance)
-		bail(err)
-
+		service, plan, _ := store.GetInstanceDetails(c.URL, instance)
 		if service == "" || plan == "" {
 			catalog, err := c.GetCatalog()
 			bail(err)
