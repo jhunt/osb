@@ -232,11 +232,16 @@ func main() {
 		}
 
 		provisioning(args)
+		l := strings.SplitN(args[0], "/", 2)
+		if len(l) != 2 {
+			fmt.Fprintf(os.Stderr, "USAGE: @G{%s} [@W{options}] @C{%s} [--id ID] @M{SERVICE}/@M{PLAN}\n", os.Args[0], command)
+			fmt.Fprintf(os.Stderr, "@R{(missing the /plan bits...)}\n\n")
+			os.Exit(1)
+		}
 
 		catalog, err := c.GetCatalog()
 		bail(err)
 
-		l := strings.SplitN(args[0], "/", 2)
 		service, plan, err := catalog.FindPlan(l[0], l[1])
 		bail(err)
 
