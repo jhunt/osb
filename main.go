@@ -32,6 +32,7 @@ var opt struct {
 	JSON bool `cli:"--json"`
 
 	List struct{} `cli:"list, ls"`
+	Env  struct{} `cli:"env"`
 
 	Catalog struct{} `cli:"catalog"`
 
@@ -102,6 +103,7 @@ func main() {
 		fmt.Printf("\n")
 		fmt.Printf("Commands:\n\n")
 		fmt.Printf("  list           List known instance and binding details, from ~/.osbrc.\n")
+		fmt.Printf("  env            Dump the environment variables that `osb` cares about.\n")
 		fmt.Printf("  catalog        Retrieve the service catalog from the service broker.\n")
 		fmt.Printf("\n")
 		fmt.Printf("  provision      Provision a new instance of a service/plan.\n")
@@ -178,6 +180,46 @@ func main() {
 		}
 		t.Output(os.Stdout)
 		os.Exit(0)
+
+	case "env":
+		e := struct {
+			Trace      bool   `json:"OSB_TRACE"`
+			Data       string `json:"OSB_DATA"`
+			URL        string `json:"OSB_URL"`
+			Username   string `json:"OSB_USERNAME"`
+			Password   string `json:"OSB_PASSWORD"`
+			SkipVerify bool   `json:"OSB_SKIP_VERIFY"`
+			Timeout    int    `json:"OSB_TIMEOUT"`
+		}{
+			Trace:      opt.Trace,
+			Data:       opt.Data,
+			URL:        opt.Endpoint,
+			Username:   opt.Username,
+			Password:   opt.Password,
+			SkipVerify: opt.SkipVerify,
+			Timeout:    opt.Timeout,
+		}
+
+		if opt.JSON {
+			jsonify(e)
+			os.Exit(0)
+		}
+
+		booly := func(tf bool) string {
+			if tf {
+				return "yes"
+			} else {
+				return "no"
+			}
+		}
+
+		fmt.Printf("export OSB_URL=\"%s\"\n", e.URL)
+		fmt.Printf("export OSB_USERNAME=\"%s\"\n", e.Username)
+		fmt.Printf("export OSB_PASSWORD=\"%s\"\n", e.Password)
+		fmt.Printf("export OSB_TIMEOUT=%d\n", e.Timeout)
+		fmt.Printf("export OSB_DATA=\"%s\"\n", e.Data)
+		fmt.Printf("export OSB_TRACE=%s\n", booly(e.Trace))
+		fmt.Printf("export OSB_SKIP_VERIFY=%s\n", booly(e.SkipVerify))
 
 	case "catalog":
 		if opt.Help {
