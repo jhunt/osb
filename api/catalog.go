@@ -39,7 +39,7 @@ type Catalog struct {
 
 			Metadata interface{} `json:"metadata,omitempty"`
 
-			Schemas []struct {
+			Schemas struct {
 				ServiceInstance struct {
 					Create struct {
 						Parameters map[string]interface{} `json:"parameters"`
