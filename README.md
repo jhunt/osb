@@ -45,3 +45,20 @@ Commands:
   unbind         Unbind an instance, releasing bound credentials.
 
 ```
+
+Development
+-----------
+
+To build:
+
+    go build
+
+Dependencies are managed via [govendor][1]:
+
+    go install github.com/kardianos/govendor
+    govendor add +external
+
+
+
+
+[1]: https://github.com/kardianos/govendor

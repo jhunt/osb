@@ -1,0 +1,68 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "yNyE9MrpDJQAxOxSipSIBgBhuNQ=",
+			"path": "github.com/google/uuid",
+			"revision": "9b3b1e0f5f99ae461456d768e7d301a7acdaa2d8",
+			"revisionTime": "2018-09-17T14:00:05Z"
+		},
+		{
+			"checksumSHA1": "wxi3v9rY+IhzvrOU4KUnFodd8IA=",
+			"path": "github.com/jhunt/go-ansi",
+			"revision": "5fd839f108b6f065c3d1734d82b2f8be8e767b73",
+			"revisionTime": "2018-11-27T19:43:24Z"
+		},
+		{
+			"checksumSHA1": "9Ac9rwC63VlGI9tHl8DqKOUcJDQ=",
+			"path": "github.com/jhunt/go-cli",
+			"revision": "44398e595118cf6d87a5a67175210964a02294fa",
+			"revisionTime": "2018-01-20T23:00:05Z"
+		},
+		{
+			"checksumSHA1": "8bXnF0vOnAodePX8tfy7vfBPM64=",
+			"path": "github.com/jhunt/go-envirotron",
+			"revision": "8bdb90f72b39102d14b82a2ead076865f8ba5886",
+			"revisionTime": "2017-10-17T04:30:50Z"
+		},
+		{
+			"checksumSHA1": "/L4hlvjltOZXrXJOrVRBdcWDAQc=",
+			"origin": "github.com/jhunt/go-cli/vendor/github.com/jhunt/go-snapshot",
+			"path": "github.com/jhunt/go-snapshot",
+			"revision": "44398e595118cf6d87a5a67175210964a02294fa",
+			"revisionTime": "2018-01-20T23:00:05Z"
+		},
+		{
+			"checksumSHA1": "qjNzfEMd19ooO8hGRk0FOVjyUbg=",
+			"path": "github.com/jhunt/go-table",
+			"revision": "68a841ca53dc1f02996da883420530906229d97d",
+			"revisionTime": "2018-11-27T21:02:44Z"
+		},
+		{
+			"checksumSHA1": "GiVgQkx5acnq+JZtYiuHPlhHoso=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "3fb116b820352b7f0c281308a4d6250c22d94e27",
+			"revisionTime": "2018-08-30T10:17:45Z"
+		},
+		{
+			"checksumSHA1": "UruiaCPpVcDKfBTQhAM6UomufIw=",
+			"path": "github.com/pborman/uuid",
+			"revision": "8b1b92947f46224e3b97bb1a3a5b0382be00d31e",
+			"revisionTime": "2018-09-18T08:52:46Z"
+		},
+		{
+			"checksumSHA1": "CqglRmlzmyTWpNeWhN32aGbGBg4=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "4ed8d59d0b35e1e29334a206d1b3f38b1e5dfb31",
+			"revisionTime": "2018-11-19T12:01:13Z"
+		},
+		{
+			"checksumSHA1": "ZSWoOPUNRr5+3dhkLK3C4cZAQPk=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "5420a8b6744d3b0345ab293f6fcba19c978f1183",
+			"revisionTime": "2018-03-28T19:50:20Z"
+		}
+	],
+	"rootPath": "github.com/jhunt/osb"
+}
