@@ -46,6 +46,24 @@ Commands:
 
 ```
 
+
+
+Docker Docker Docker!!!
+-----------------------
+
+The `huntprod/osb` Docker image lets you run osb without having to
+compile or install it yourself!
+
+    docker run -it huntprod/osb -h
+    docker run -it huntprod/osb --endpoint http://localhost:3000 \
+                                --username broker \
+                                --password broker \
+                                catalog
+
+etc.
+
+
+
 Development
 -----------
 
@@ -53,12 +71,26 @@ To build:
 
     go build
 
+or:
+
+    make
+
 Dependencies are managed via [govendor][1]:
 
     go install github.com/kardianos/govendor
     govendor add +external
 
+To release:
 
+    make release VERSION=x.y.z
+
+To build the (release) Docker image, huntprod/osb:x.y.z:
+
+    make docker VERSION=x.y.z
+
+To push released Docker images up to DockerHub:
+
+    make push VERSION=x.y.z
 
 
 [1]: https://github.com/kardianos/govendor
