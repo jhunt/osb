@@ -1,0 +1,43 @@
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: osb
+spec:
+  containers:
+    - name: osb
+      image: huntprod/osb
+      imagePullPolicy: Always
+      command: ['/bin/sleep']
+      args: ['10000d']
+
+      env:
+        - name:  OSB_URL
+          value: http://your-osb-url-here
+
+        - name:  OSB_USERNAME
+          value: your-osb-username
+
+        # note: in production-y cases, you probably
+        # want to set this via a Secret and a keyRef...
+        #
+        - name:  OSB_PASSWORD
+          value: your-osb-password
+
+        # to turn on a bunch of debugging output,
+        # uncomment this:
+        #
+        #- name:  OSB_TRACE
+        #  value: 'yes'
+
+        # if your broker takes too long to do things,
+        # you can tweak the HTTP request timeout here.
+        #
+        #- name:  OSB_TIMEOUT
+        #  value: 90
+
+        # if you need to skip TLS verification of the
+        # OSB HTTPS X.509 certificates, uncomment this:
+        #
+        #- name:  OSB_SKIP_VERIFY
+        #  value: 'yes'
